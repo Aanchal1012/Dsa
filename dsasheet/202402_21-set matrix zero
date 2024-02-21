@@ -1,0 +1,113 @@
+//73: set matrix zero
+
+//brute force
+
+void setZeroes(vector<vector<int>>& matrix) {
+	int row = matrix.size();
+	int col = matrix[0].size();
+	vector<vector<int>>matrix2;
+
+	//copying matrix 1 to matrix 2
+
+	for(int i = 0; i <row; i++){
+		for(int j = 0; j<col; j++){
+			matrix2[i][j] = matrix[i][j];
+		}
+	}
+
+	//traversing the original matrix and setting matrix2 row and col as 0 if we get any zero in the original one
+
+	for(int i = 0; i<row; i++)
+	{
+		for(int j = 0; j<col; j++){
+			if(matrix[i][j]==0){
+				for(int i2=0; i2<row; i++)
+				{
+					matrix2[i2][j]=0;
+				}
+				for(int j2=0; j2<col; j2++){
+					matrix2[i][j2]=0;
+				}
+			}
+		}
+	}
+
+	//copying matrix2 back to original matrix
+	for(int i = 0; i < row; i++){
+		for(int j = 0; j < col; j++){
+			matrix2[i][j] = matrix[i][j];
+		}
+	}
+}
+
+//TC=> O((Row*col)*(row + col))-> matrix traversal is row*col multiplied by the matrix2 travesal and fill up which is O(row + col)
+//SC => O(row*col)-> matrix duplicated 
+
+//Optimal Approach 
+
+void setZeroes(vector<vector<int>>& matrix) {
+	int row = matrix.size();
+	int col = matrix[0].size();
+
+	vector<int>rowarray(row, 1);
+	vector<int>colarray(col, 1);
+
+
+	// fill the row and col array with zeros whenever while traversing the matrix a zero is found
+	for(int i = 0; i < row; i++){
+		for(int j = 0; j < col; j++){
+			if(matrix[i][j]==0){
+				rowarray[i]=0;
+				colarray[j]=0;
+			}
+		}
+	}
+
+	//retraverse the matrix and fill its entire row and col with zero whenever we get 0 in rowarray or colarray
+
+	for(int i = 0; i < row; i++){
+		for(int j = 0; j < col; j++){
+			if(rowarray[i]==0 || colarray[j]==0){
+				matrix[i][j] == 0;
+			}
+		}
+	}
+}
+
+//TC : O(Row*col)-> matrix traversal
+//SC => O(ROW+COL)-> row array and col array
+
+//Best Solution
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
